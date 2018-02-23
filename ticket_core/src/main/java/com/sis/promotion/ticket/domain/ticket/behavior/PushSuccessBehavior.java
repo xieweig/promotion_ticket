@@ -6,20 +6,17 @@ import com.sis.promotion.ticket.domain.enums.SubmitEnum;
 import com.sis.promotion.ticket.domain.ticket.TicketBill;
 
 /**
- * submitedSuccessBehavior
+ * pushSuccessBehavior
  *
  * @author xie_weiguang
  * @date 2018/2/23
  */
-public class submitedSuccessBehavior implements DomainBehavior {
+public class PushSuccessBehavior implements DomainBehavior {
     @Override
     public TicketBill reachNextStateSet(TicketBill ticketBill) {
-        if (ticketBill.getPushEnum() == PushEnum.PUSHED_SUCCESS || ticketBill.getConsumeEnum() == ConsumeEnum.CONSUMED_SUCCESS)
+        if (ticketBill.getConsumeEnum() == ConsumeEnum.CONSUMED_SUCCESS || ticketBill.getSubmitEnum() != SubmitEnum.SUBMITED_SUCCESS)
             throw new RuntimeException("流程错误:"+this.getClass().getSimpleName());
-
-        ticketBill.setSubmitEnum(SubmitEnum.SUBMITED_SUCCESS);
-        ticketBill.setConsumeEnum(ConsumeEnum.CONSUME_NOT_YET);
-        ticketBill.setPushEnum(PushEnum.PUSH_NOT_YET);
+        ticketBill.setPushEnum(PushEnum.PUSHED_SUCCESS);
         return ticketBill;
     }
 }

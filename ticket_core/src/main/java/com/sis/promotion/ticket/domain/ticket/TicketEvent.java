@@ -15,4 +15,12 @@ public class TicketEvent extends BaseDomainEvent {
     public TicketEvent(TicketBill ticketBill) {
         this.ticketBill = ticketBill;
     }
+
+    public TicketBill getTicketBill() {
+        return ticketBill;
+    }
+
+    public void setTicketBill(TicketBill ticketBill) {
+        this.ticketBill = ticketBill;
+    }
 }
